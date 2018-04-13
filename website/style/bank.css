@@ -1,0 +1,46 @@
+<!--
+body{
+    background-color:#637a42;
+}
+.log{
+    background-color:#8b9c32;
+    height:500px;
+    width:500px;
+    margin:0 auto;
+    padding:10px;
+    font-size:30px;
+}
+.in{
+    font-size:23px;
+    float:right;
+    color:#161d0b;
+    background-color:#efef81;
+    border:none;
+}
+.check{
+    display:none;
+    background-color:#efef81;
+    float:right;
+    padding: 9px;
+    display: inline-block;
+}
+.Sco{
+    width:450px;
+    height:40px;
+}
+.sub{
+    text-align:center;
+    display:box;
+    height:40px;
+    font-size:25px;
+    color:#161d0b;
+    background-color:#efef81;
+    border:none;
+    border-radius:5px;
+    margin:0 auto;
+}
+.sub:hover{
+    color:#efef81;
+    background-color:#161d0b;
+}
+//-->

@@ -1,0 +1,76 @@
+<!--
+body{
+    background-color:LightCyan;
+    font-size:50;
+}
+.log{
+    background-color:SlateGrey;
+    height:1500px;
+    width:1000px;
+    margin:0 auto;
+    padding:10px;
+    font-size:30px;
+    border-radius:5px;
+}
+.in{
+    font-size:50px;
+    float:right;
+    color:Azure;
+    background-color:DarkSlateGrey;
+    border:none;
+    border-radius:5px;
+}
+.in:focus{
+    color:DarkSlateGrey;
+    background-color:Azure;
+}
+input[type="checkbox"]{
+    display:none;
+}
+.check + label span{
+    display:inline-block;
+    background-color:DarkSlateGrey;
+    float:right;
+    height:50px;
+    width:50px;
+    border:30px solid DarkSlateGrey;
+    border-radius:5px;
+}
+.check:checked + label span{
+    background-color:Azure;
+}
+.Sco{
+    width:950px;
+    height:100px;
+    font-size:50px;
+}
+.sub{
+    text-align:center;
+    display:box;
+    height:100px;
+    font-size:80px;
+    color:Azure;
+    background-color:DarkSlateGrey;
+    border:none;
+    border-radius:5px;
+    margin:0 auto;
+}
+.sub:hover{
+    color:DarkSlateGrey;
+    background-color:Azure;
+}
+.key{
+    display:box;
+    height:170px;
+    width:250px;
+    font-size:150px;
+    color:azure;
+    background-color:DarkSlateGrey;
+    border:none;
+    border-radius:5px;
+}
+.key:hover{
+    color:DarkSlateGrey;
+    background-color:Azure;
+}
+//-->

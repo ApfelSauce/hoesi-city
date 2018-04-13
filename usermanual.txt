@@ -1,0 +1,93 @@
+1. server starten
+
+
+
+Um den Server in Gang zu setzen, müssen drei verschiedene skripte unabhängig von einander ausgeführt werden:
+
+main.py
+admin.py
+timerun.py
+
+die Möglichkeit eines Konsolenoutputs ist dabei (zu Debugging-Zwecken) hilfreich, allerdings nicht zwingend notwendig.
+admin.py und main.py werden bei ihrem Start an die Ports 1413 sowie 8080 binden.
+
+
+
+2. Die Dateien
+
+ad_handler.py
+
+	Hier findet die Verarbeitung der Requests von Administratoren statt. Die Namen der Administratoren,
+	 sowie deren Passwörter werden in der Variable "login" in der Form {<loginname>:<passwort>,<loginname2>:<passwort2>,...:...} abgespeichert, und bei einer Anfrage überprüft.
+	Das Skript verschlüsselt sämtliche Verbindungen mit dem Zertifikat cert/public.pem.
+
+
+
+
+
+admin.py
+
+	Das Hauptprogramm zur Verwaltung von Administratoren- Anfragen. Es nimmt Verbindungen entgegen und lässt sie in Subprozessen durch ad_handler.py verarbeiten.
+	Überschreitet die Verarbeitungszeit den in "timeout" festgelegten wert ( in Sekunden), wird der Prozess beendet.
+	Die Variable "timeout" sollte das in ad_handler festgelegte timeout (5s) nicht unterschreiten, weil der Prozess sonst evtl. beendet wird, bevor die Verarbeitung beendet wurde.
+	
+
+
+database.db
+
+	In dieser Datanbank wird unter dem Namen "pupil" eine Liste aller registrierten Kunden mit id, passwort, dem Guthaben des Schülers, der id seines Geschäfts (gid) und dem Status seines Accounts (benutzbar=0,gesperrt=1) gefürt.
+	Es wird ebenfalls eine Liste mit Geschäften ("store") mit id,name,Kontostand,Raum des Geschäftes, und Status des Accounts geführt.
+	Die Datenbank sollte zur Laufzeit des Servers nicht manuell bearbeitet werden, weil bis zum Speichern der Änderungen nicht anderweitig auf die Datenbank zugegriffen werden kann, was bei einer zu langen Zugriffszeit zu einem Serverabsturz führen kann.
+	Wird im Zeitintervall der Gehaltsübertragung als Sicherungskopie in ./safe abgelegt
+
+
+dbmanager.py
+
+	Auf dieses Skript greifen alle Prozesse zu, weil es elementare Prozesse wie Geldübertragung zwischen Konten, oder die Kontrolle von Logins unterstützt.
+	
+
+handler.py
+
+	Das Skript wird von main.py aufgerufen und übernimmt die Zerlegung eines http-paketes in die einzelnen Parameter. es gibt das zerlegte Paket an manager.py weiter, wo es letztendlich verarbeitet wird.
+	
+main.py
+
+	Das Hauptprogramm zur Verwaltung von normalen Anfragen. Es nimmt Verbindungen entgegen und lässt sie in Subprozessen durch handler.py verarbeiten.
+	Überschreitet die Verarbeitungszeit den in "timeout" festgelegten wert ( in Sekunden), wird der Prozess beendet.
+	Die Variable "timeout" sollte das in ad_handler festgelegte timeout (5s) nicht unterschreiten, weil der Prozess sonst evtl. beendet wird, bevor die Verarbeitung beendet wurde.
+	
+
+
+manager.py
+
+	Übernimmt die letztendliche Verarbeitung normaler Anfragen.
+	
+
+sfile.db
+
+	Speicherdatenbank für alle  stattgefundenen Transfers Name der Datenbank: "transfers" Es werden Höhe des transfers, Herkunfts- und Zielid, der genaue Zeitpunkt der Übertragung, eine id sowie die Arten der Herkunfts- und Zielkonten gespeichert (0=pupil, 1=store)
+	Wird im Zeitintervall der Gehaltsübertragung als Sicherungskopie in ./safe abgelegt
+
+
+
+timefile.s
+
+	Speicherdokument von python shelve.
+	Es werden Mindestgehalt ("lowest"), Höhe der Steuern ("tax"), Intervall der Gehaltsausgabe ("sleeptime") und Gruppen, welche Geldzuschüsse  bekommen in der Form {<id der Gruppe>:<zugewiesenes Geld>,} gespeichert.
+
+
+timerun.py
+	
+	Teilt im in timefile.s festgelegten Intervall das Geld der Geschäfte auf die Arbeiter auf. Jeder bekommt mind. das in timefile.s festgelegte Gehalt. Kontostand der in timefile.s festgelegten Geschäfte wird erhöht.
+	
+
+
+
+
+
+
+
+
+
+
+
