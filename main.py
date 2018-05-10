@@ -3,12 +3,11 @@ from http.server import BaseHTTPRequestHandler,HTTPServer
 import handler
 
 hostip=""
-timeout=20 # process that handles request will be killed after this timeout
 
 
 class handler_class(BaseHTTPRequestHandler):
 	def do_GET(self):
-		pack="GET "+self.path+" "+self.request_version+"\r\n"+self.headers.as_string()
+		pack="GET "+self.path+" "+self.request_version+"\n"+self.headers.as_string()
 		print(pack)
 		self.myfunction(pack)
 		
@@ -25,12 +24,12 @@ class handler_class(BaseHTTPRequestHandler):
 		
 	def do_POST(self):
 		pack="POST "+self.path+" "+self.request_version+"\r\n"+self.headers.as_string()+"\r\n\r\n"
-		if True:
+		try:
 			LEN= int(self.headers.get("content-length"))
 			pack+= self.rfile.read(LEN).decode()
 			print(pack)
-		else:
-			print(1)
+		except:
+			print(">> converter: content-length missing")
 			pass
 		print(pack)
 		self.myfunction(pack)

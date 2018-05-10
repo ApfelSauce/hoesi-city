@@ -12,6 +12,7 @@ logindir = webdir
 
 
 def go(pack):
+	print(pack.args)
 	if pack.args['Directorie'] == '/puplogin.html':
 		print(">> manager: handle pack as pupil")
 		manager = pupilmanager(pack)

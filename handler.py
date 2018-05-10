@@ -26,7 +26,7 @@ class packin:
 		
 		for i in replaces.keys():
 			self.pack_dec.replace(i,replaces[i])
-		lines=self.pack_dec.split("\r\n")
+		lines=self.pack_dec.split("\n")
 		#set parameters from first line
 		temp=lines[0].split(" ")
 		if len(temp)!=3:
