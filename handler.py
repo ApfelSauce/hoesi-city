@@ -57,11 +57,14 @@ class packin:
 	
 	
 	def control(self,musthaves):
+		print("-->>controll")
 		for i in musthaves.keys():
 			if not self.getarg(i):
 				self.errors+=[420]
-			elif self.args[i]!=musthaves[i] and musthaves[i]!=None:
-				self.errors+=[409]
+			#elif self.args[i]!=musthaves[i] and musthaves[i]!=None:
+			#	print(self.args[i]+"\n"+musthaves[i]+"")
+			#	print("-->>Adding ERROR 409")
+			#	self.errors+=[409]
 		if self.getarg('Method')=="POST" and not self.getarg("Formdata"):
 			self.errors += [420]
 		return self.errors

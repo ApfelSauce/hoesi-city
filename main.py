@@ -12,6 +12,7 @@ class handler_class(BaseHTTPRequestHandler):
 		self.myfunction(pack)
 		
 	def myfunction(self,pack):
+		print("-->> myfunction")
 		a=handler.go(pack)
 		if type(a)==int:
 			self.send_error(a)
@@ -23,6 +24,7 @@ class handler_class(BaseHTTPRequestHandler):
 			self.wfile.write(a.data)
 		
 	def do_POST(self):
+		print("-->> do_POST runs")
 		pack="POST "+self.path+" "+self.request_version+"\r\n"+self.headers.as_string()+"\r\n\r\n"
 		try:
 			LEN= int(self.headers.get("content-length"))
